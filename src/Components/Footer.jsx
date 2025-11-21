@@ -13,8 +13,8 @@ const Footer = () => {
                         <Link to={'/'} className='flex items-center gap-2'>
                             <img className='h-10' src={logo} alt="" />
                             <div>
-                                <h1 className='text-3xl font-bold text-green-900'>Clean<span className='bg-linear-to-r from-green-700 to-green-400 bg-clip-text text-transparent'>Sphere</span></h1>
-                                <p className='text-sm font-medium text-green-900'>Report & Resolve</p>
+                                <h1 className='text-3xl font-bold text-green-700'>Clean<span className='bg-linear-to-r from-green-600 to-green-400 bg-clip-text text-transparent'>Sphere</span></h1>
+                                <p className='text-sm font-medium text-green-700'>Report & Resolve</p>
                             </div>
                         </Link>
                         <p className='text-gray-300 w-1/2 mt-4'>Connecting communities through actionable insights — report, track, and resolve local issues for a cleaner, smarter environment.</p>

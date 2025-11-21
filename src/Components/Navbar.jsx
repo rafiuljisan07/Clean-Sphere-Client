@@ -8,7 +8,7 @@ const Navbar = () => {
             <div className='flex justify-between items-center max-w-11/12 mx-auto py-2'>
                 <Link to={'/'} className='flex items-center gap-2'>
                     <img className='h-10' src={logo} alt="" />
-                    <h1 className='text-3xl font-bold text-green-900'>Clean<span className='bg-linear-to-r from-green-700 to-green-400 bg-clip-text text-transparent'>Sphere</span></h1>
+                    <h1 className='text-3xl font-bold text-green-700'>Clean<span className='bg-linear-to-r from-green-600 to-green-400 bg-clip-text text-transparent'>Sphere</span></h1>
                 </Link>
                 <div className='space-x-5'>
                     <NavLink to={'/'}>Home</NavLink>
