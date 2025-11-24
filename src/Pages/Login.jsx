@@ -18,6 +18,7 @@ const Login = () => {
         signInUser(email, password)
             .then(() => {
                 e.target.reset();
+                navigate(location.state || '/')
             })
             .catch(err => {
                 if (err.code === 'auth/wrong-password') {
@@ -40,7 +41,7 @@ const Login = () => {
         .catch()
     }
     return (
-        <div className='flex justify-center items-center h-screen'>
+        <div className='flex justify-center items-center h-screen-80'>
             <div className="w-full max-w-4xl bg-white rounded-xl shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2">
                 <div className="hidden md:flex flex-col items-start justify-center gap-4 p-8 bg-linear-to-br from-green-600 to-teal-600">
                     <h2 className="text-3xl md:text-4xl font-extrabold text-white">Welcome Back</h2>

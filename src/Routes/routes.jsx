@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import AddIssue from "../Components/AddIssue";
 import MyIssues from "../Components/MyIssues";
 import MyContribution from "../Components/MyContribution";
+import IssueDetails from "../Components/IssueDetails";
 
 export const router = createBrowserRouter([
     {
@@ -51,6 +52,14 @@ export const router = createBrowserRouter([
                     <PrivateRoute>
                         <MyContribution />
                     </PrivateRoute>)
+            },
+            {
+                path: '/issues/:id',
+                element: (
+                    <PrivateRoute>
+                        <IssueDetails />
+                    </PrivateRoute>),
+                loader: ({params})=> fetch(`http://localhost:3000/issues/${params.id}`)
             }
         ]
     }

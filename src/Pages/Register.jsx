@@ -48,7 +48,7 @@ const Register = () => {
 
     };
     return (
-        <div className="flex items-start justify-center py-12 bg-gray-50">
+        <div className="flex justify-center bg-gray-50">
             <div className="w-full max-w-md bg-white p-6 border border-gray-200 rounded-lg shadow-lg">
                 <h2 className="text-2xl font-semibold mb-4">Create an account</h2>
 
