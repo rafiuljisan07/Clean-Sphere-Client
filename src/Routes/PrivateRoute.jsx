@@ -4,10 +4,9 @@ import Loading from '../Components/Loading';
 import { Navigate } from 'react-router';
 
 const PrivateRoute = ({ children }) => {
-    const { data, loading } = use(AuthContext);
-    
+    const { user, loading } = use(AuthContext);
     if (loading) return <Loading />
-    if (data) return children;
+    if (user) return children;
 
     return <Navigate state={location?.pathname} to={'/login'} />;
 };

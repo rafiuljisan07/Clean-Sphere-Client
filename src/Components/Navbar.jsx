@@ -30,7 +30,7 @@ const Navbar = () => {
                         user ?
                             <div className='flex items-center gap-5 '>
                                 <NavLink to={'/add-issue'} >Add Issue</NavLink>
-                                <NavLink to={'/my-issue'} >My Issue</NavLink>
+                                <NavLink to={'/my-issues'} >My Issues</NavLink>
                                 <NavLink to={'/my-contribution'} >My Contribution</NavLink>
                                 <div className="relative">
                                     <img

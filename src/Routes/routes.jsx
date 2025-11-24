@@ -4,6 +4,10 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import All_Issues from "../Components/All_Issues";
+import PrivateRoute from "./PrivateRoute";
+import AddIssue from "../Components/AddIssue";
+import MyIssues from "../Components/MyIssues";
+import MyContribution from "../Components/MyContribution";
 
 export const router = createBrowserRouter([
     {
@@ -12,20 +16,41 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                Component: Home
+                element: <Home />
             },
             {
                 path: '/issues',
-                Component: All_Issues,
+                element: <All_Issues />,
                 loader: () => fetch('http://localhost:3000/issues')
             },
             {
                 path: '/login',
-                Component: Login
+                element: <Login />
             },
             {
                 path: '/register',
-                Component: Register
+                element: <Register />
+            },
+            {
+                path: '/add-issue',
+                element: (
+                    <PrivateRoute>
+                        <AddIssue />
+                    </PrivateRoute>)
+            },
+            {
+                path: '/my-issues',
+                element: (
+                    <PrivateRoute>
+                        <MyIssues />
+                    </PrivateRoute>)
+            },
+            {
+                path: '/my-contribution',
+                element: (
+                    <PrivateRoute>
+                        <MyContribution />
+                    </PrivateRoute>)
             }
         ]
     }

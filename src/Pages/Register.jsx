@@ -24,22 +24,22 @@ const Register = () => {
             return
         };
         createUser(email, password)
-        .then(() => {
-            updateUserProfile(name, photoURL).then().catch(err => alert(err.code))
-            navigate(location.state || '/');
-            alert('signup successfully')
-        })
-        .catch(err => {
-             if (err.code === 'auth/email-already-in-use') {
-                   alert('❌ This email is already registered. Please log in instead.')
+            .then(() => {
+                updateUserProfile(name, photoURL).then().catch(err => alert(err.code))
+                navigate(location.state || '/');
+                alert('signup successfully')
+            })
+            .catch(err => {
+                if (err.code === 'auth/email-already-in-use') {
+                    alert('❌ This email is already registered. Please log in instead.')
                 }
                 else {
-                   alert('❗ Something went wrong. Please try again.')
+                    alert('❗ Something went wrong. Please try again.')
                 }
-        })
+            })
     };
 
-      const handleGoogleSignUp = () => {
+    const handleGoogleSignUp = () => {
         signInWithGoogle()
             .then(() => {
                 navigate(location.state || '/')
@@ -99,7 +99,9 @@ const Register = () => {
                             {showPass ? <FaEyeSlash /> : <FaEye />}
                         </button>
                     </label>
-
+                    {
+                        passErr && <p className='text-red-500'>Password must have at least 1 uppercase, 1 lowercase and be 6+ characters.</p>
+                    }
                     <button
                         type="submit"
                         className="w-full py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition-colors"
@@ -111,7 +113,7 @@ const Register = () => {
                 <div className="text-center my-3 text-sm text-gray-500">or</div>
 
                 <button
-                onClick={handleGoogleSignUp}
+                    onClick={handleGoogleSignUp}
                     type="button"
                     className="w-full flex items-center justify-center gap-3 py-2 bg-white text-gray-900 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
                 >
