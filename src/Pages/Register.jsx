@@ -3,6 +3,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Authentication/AuthContext';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const { createUser, signInWithGoogle, updateUserProfile } = use(AuthContext);
@@ -25,16 +26,30 @@ const Register = () => {
         };
         createUser(email, password)
             .then(() => {
-                updateUserProfile(name, photoURL).then().catch(err => alert(err.code))
+                updateUserProfile(name, photoURL).then().catch(err => alert(err.code));
+                Swal.fire({
+                    icon: "success",
+                    title: "Registration Successful!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true
+                });
                 navigate(location.state || '/');
-                alert('signup successfully')
             })
             .catch(err => {
                 if (err.code === 'auth/email-already-in-use') {
-                    alert('❌ This email is already registered. Please log in instead.')
+                    Swal.fire({
+                        icon: "error",
+                        title: "Registration failed!",
+                        text: '❌ This email is already registered. Please log in instead.'
+                    });
                 }
                 else {
-                    alert('❗ Something went wrong. Please try again.')
+                    Swal.fire({
+                        icon: "error",
+                        title: "Registration failed!",
+                        text: '❗Something went wrong. Please try again.'
+                    });
                 }
             })
     };

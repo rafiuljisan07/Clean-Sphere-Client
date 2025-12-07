@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Authentication/AuthContext';
 import { toast } from 'react-toastify';
 import Container from '../container/Container';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const MyIssues = () => {
     const [myIssues, setMyIssues] = useState([]);
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`http://localhost:3000/my-issues?email=${user?.email}`)
@@ -15,7 +17,34 @@ const MyIssues = () => {
             .catch(err => toast.error(err))
     }, [user?.email]);
 
-    console.log(myIssues);
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Confirm Delete?",
+            text: "This item will be permanently deleted.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Delete",
+            cancelButtonColor: "#d33"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // API CALL
+                axios.delete(`http://localhost:3000/delete/${id}`)
+                    .then(() => {
+                        const filteredIssues = myIssues.filter(issue => issue._id !== id);
+                        setMyIssues(filteredIssues)
+                        Swal.fire({
+                            icon: "success",
+                            title: "Deleted!",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    })
+                    .catch(err => {
+
+                    })
+            }
+        });
+    }
 
     return (
         <Container>
@@ -55,7 +84,10 @@ const MyIssues = () => {
                                                 Update
                                             </button>
                                         </Link>
-                                        <button className="btn btn-error rounded-lg">
+                                        <button
+                                            className="btn btn-error rounded-lg"
+                                            onClick={() => { handleDelete(issue?._id) }}
+                                        >
                                             Delete
                                         </button>
                                     </td>

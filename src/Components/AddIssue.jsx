@@ -3,6 +3,7 @@ import Container from '../container/Container';
 import { AuthContext } from '../Authentication/AuthContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const AddIssue = () => {
     const { user } = useContext(AuthContext);
@@ -32,7 +33,13 @@ const AddIssue = () => {
 
         axios.post('http://localhost:3000/issues', formData)
             .then(() => {
-                toast.success('Added Successfully')
+                Swal.fire({
+                    icon: "success",
+                    title: "Added!",
+                    text: "Your Issue has been successfully Added",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 form.reset();
             })
             .catch((err) => {

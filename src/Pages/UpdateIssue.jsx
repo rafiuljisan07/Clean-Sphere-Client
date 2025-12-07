@@ -4,6 +4,7 @@ import Container from '../container/Container';
 import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const UpdateIssue = () => {
     const { user } = useContext(AuthContext);
@@ -47,6 +48,13 @@ const UpdateIssue = () => {
         axios.put(`http://localhost:3000/update/${id}`, formData)
             .then(() => {
                 form.reset();
+                Swal.fire({
+                    icon: "success",
+                    title: "Issue Updated!",
+                    text: "Your issue has been successfully Updated.",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 navigate('/my-issues')
             })
             .catch(err => {

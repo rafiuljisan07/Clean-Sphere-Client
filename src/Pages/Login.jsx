@@ -3,6 +3,7 @@ import { FaEye, FaEyeSlash, FaRegArrowAltCircleRight, FaUserLock } from 'react-i
 import { FcGoogle } from 'react-icons/fc';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Authentication/AuthContext';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const { signInUser, signInWithGoogle } = use(AuthContext);
@@ -18,27 +19,52 @@ const Login = () => {
         signInUser(email, password)
             .then(() => {
                 e.target.reset();
+                Swal.fire({
+                    icon: "success",
+                    title: "Login Successful!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true
+                });
                 navigate(location.state || '/')
             })
             .catch(err => {
                 if (err.code === 'auth/wrong-password') {
-                    alert("🚫 Incorrect password. Try again.")
+                    Swal.fire({
+                        icon: "error",
+                        title: "Login failed!",
+                        text: "🚫 Incorrect password. Try again."
+                    });
                 }
                 else if (err.code === "auth/invalid-credential")
-                    alert("⚠️ Invalid credentials. Please check your email and password.")
+                    Swal.fire({
+                        icon: "error",
+                        title: "Login failed!",
+                        text: "⚠️ Invalid credentials. Please check your email and password."
+                    });
                 else {
-                    alert('Something went Wrong. Try Again')
+                    Swal.fire({
+                        icon: "error",
+                        title: "Login failed!",
+                        text: err.message
+                    });
                 }
             });
     };
 
     const handleGoogleLogin = () => {
         signInWithGoogle()
-        .then(() => {
-            navigate('/')
-            alert('login successfully');
-        })
-        .catch()
+            .then(() => {
+                navigate(location.state || '/')
+                Swal.fire({
+                    icon: "success",
+                    title: "Login Successful!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true
+                });
+            })
+            .catch()
     }
     return (
         <div className='flex justify-center items-center h-screen-80'>
