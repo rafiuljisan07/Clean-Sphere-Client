@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Container from '../container/Container';
 import { AuthContext } from '../Authentication/AuthContext';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const AddIssue = () => {
     const { user } = useContext(AuthContext);
@@ -31,10 +32,11 @@ const AddIssue = () => {
 
         axios.post('http://localhost:3000/issues', formData)
             .then(() => {
-
+                toast.success('Added Successfully')
+                form.reset();
             })
             .catch((err) => {
-
+                toast.error(err)
             })
 
 
@@ -65,7 +67,8 @@ const AddIssue = () => {
                         <input
                             type="text"
                             name='title'
-                            placeholder="e.g. Broken streetlight on 4th Ave"
+                            required
+                            placeholder="e.g. Broken streetlight"
                             className="w-full rounded-xl border border-gray-200 bg-white/60 px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition"
                         />
                     </div>
@@ -92,6 +95,7 @@ const AddIssue = () => {
                         <input
                             type="text"
                             name='location'
+                            required
                             placeholder="Neighborhood, address or landmark"
                             className="w-full rounded-xl border border-gray-200 bg-white/60 px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition"
                         />
@@ -114,6 +118,7 @@ const AddIssue = () => {
                     <label className="block text-md font-medium mb-1">Description</label>
                     <textarea
                         name='description'
+                        required
                         rows="5"
                         placeholder="Add a clear, concise description of the issue..."
                         className="w-full rounded-2xl border border-slate-200 bg-white/60 px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition"
@@ -126,6 +131,7 @@ const AddIssue = () => {
                         <input
                             type="url"
                             name='image'
+                            required
                             placeholder="https://"
                             className="w-full rounded-xl border border-gray-200 bg-white/60 px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition"
                         />
@@ -139,6 +145,7 @@ const AddIssue = () => {
                             <input
                                 type="number"
                                 name='amount'
+                                required
                                 placeholder="0.00"
                                 className="w-full rounded-xl border border-gray-200 bg-white/60 px-10 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition"
                             />

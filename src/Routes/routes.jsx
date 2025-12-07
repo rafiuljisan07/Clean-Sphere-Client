@@ -9,6 +9,7 @@ import AddIssue from "../Components/AddIssue";
 import MyIssues from "../Components/MyIssues";
 import MyContribution from "../Components/MyContribution";
 import IssueDetails from "../Components/IssueDetails";
+import UpdateIssue from "../Pages/UpdateIssue";
 
 export const router = createBrowserRouter([
     {
@@ -60,6 +61,13 @@ export const router = createBrowserRouter([
                         <IssueDetails />
                     </PrivateRoute>),
                 loader: ({params})=> fetch(`http://localhost:3000/issues/${params.id}`)
+            },
+            {
+                path: '/my-issues/update/:id',
+                element: (
+                    <PrivateRoute>
+                        <UpdateIssue />
+                    </PrivateRoute>)
             }
         ]
     }

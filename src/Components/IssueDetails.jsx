@@ -4,7 +4,7 @@ import Container from '../container/Container';
 
 const IssueDetails = () => {
     const data = useLoaderData();
-    const { title, category, location, description, image, amount, email, date } = data;
+    const { title, category, location, description, image, amount, date } = data;
 
     return (
         <Container>
