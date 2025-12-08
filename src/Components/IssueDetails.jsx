@@ -20,7 +20,7 @@ const IssueDetails = () => {
         const email = form.email.value;
         const phone = form.phone.value;
         const address = form.address.value;
-        const date = form.date.value;
+        const category = form.category.value;
         const info = form.info.value;
 
         const formData = {
@@ -30,8 +30,9 @@ const IssueDetails = () => {
             email,
             phone,
             address,
+            category,
             date,
-            info,
+            info
         }
 
         axios.post('http://localhost:3000/contributions', formData)
@@ -115,14 +116,19 @@ const IssueDetails = () => {
                                         className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-800" />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Date</label>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Category</label>
                                     <input
                                         type="text"
-                                        name='date'
-                                        value={new Date().toISOString().split("T")[0]}
+                                        name='category'
+                                        value={category}
                                         disabled
                                         className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-800" />
                                 </div>
+                                <input
+                                    type="hidden"
+                                    name="date"
+                                    value={new Date().toISOString().split("T")[0]}
+                                />
                             </div>
 
                             <div>
