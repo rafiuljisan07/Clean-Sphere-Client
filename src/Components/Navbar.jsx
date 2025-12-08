@@ -38,7 +38,7 @@ const Navbar = () => {
                 </Link>
                 <div className='flex gap-5 items-center font-medium'>
                     <NavLink to={'/'}>Home</NavLink>
-                    <NavLink to={'/issues'}>Issues</NavLink>
+                    <NavLink to={'/issues'}>All Issues</NavLink>
                     {
                         user ?
                             <div className='flex items-center gap-5 '>

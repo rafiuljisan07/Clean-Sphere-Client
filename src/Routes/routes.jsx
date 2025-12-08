@@ -10,6 +10,7 @@ import MyIssues from "../Components/MyIssues";
 import MyContribution from "../Components/MyContribution";
 import IssueDetails from "../Components/IssueDetails";
 import UpdateIssue from "../Pages/UpdateIssue";
+import CatIssues from "../Components/CatIssues";
 
 export const router = createBrowserRouter([
     {
@@ -67,6 +68,13 @@ export const router = createBrowserRouter([
                 element: (
                     <PrivateRoute>
                         <UpdateIssue />
+                    </PrivateRoute>)
+            },
+            {
+                path: '/category/:name',
+                element: (
+                    <PrivateRoute>
+                        <CatIssues />
                     </PrivateRoute>)
             }
         ]

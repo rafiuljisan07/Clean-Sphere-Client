@@ -87,6 +87,7 @@ const AddIssue = () => {
                                 name='category'
                                 className="w-full rounded-xl border border-gray-200 bg-white/60 px-4 py-2 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition transform hover:scale-[1.01]"
                             >
+                                <option>Select Category</option>
                                 <option>Garbage</option>
                                 <option>Illegal Construction</option>
                                 <option>Broken Public Property</option>
