@@ -5,15 +5,19 @@ import Container from '../container/Container';
 import { Link, useNavigate } from 'react-router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import Loading from './Loading';
 
 const MyIssues = () => {
     const [myIssues, setMyIssues] = useState([]);
     const { user } = useContext(AuthContext);
-    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/my-issues?email=${user?.email}`)
-            .then(res => setMyIssues(res.data))
+        axios.get(`https://clean-sphere-server.vercel.app/my-issues?email=${user?.email}`)
+            .then(res => {
+                setMyIssues(res.data)
+                setLoading(false)
+            })
             .catch(err => toast.error(err))
     }, [user?.email]);
 
@@ -28,7 +32,7 @@ const MyIssues = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 // API CALL
-                axios.delete(`http://localhost:3000/delete/${id}`)
+                axios.delete(`https://clean-sphere-server.vercel.app/delete/${id}`)
                     .then(() => {
                         const filteredIssues = myIssues.filter(issue => issue._id !== id);
                         setMyIssues(filteredIssues)
@@ -39,15 +43,18 @@ const MyIssues = () => {
                             timer: 1500
                         });
                     })
-                    .catch(err => {
+                    .catch(() => {
 
                     })
             }
         });
     }
 
+    if (loading) return <Loading />
+
     return (
         <Container>
+             <title>Clean Sphere | My Issues</title>
             <div className="max-w-6xl mx-auto px-4 py-8">
                 <h1 className="text-2xl font-bold text-gray-800 mb-6">My Issues</h1>
 

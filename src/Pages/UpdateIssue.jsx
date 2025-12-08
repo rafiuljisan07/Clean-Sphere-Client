@@ -14,7 +14,7 @@ const UpdateIssue = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/issues/${id}`)
+        axios.get(`https://clean-sphere-server.vercel.app/issues/${id}`)
             .then(res => {
                 setIssue(res.data)
                 setCategory(res.data.category)
@@ -45,7 +45,7 @@ const UpdateIssue = () => {
             date
         };
 
-        axios.put(`http://localhost:3000/update/${id}`, formData)
+        axios.put(`https://clean-sphere-server.vercel.app/update/${id}`, formData)
             .then(() => {
                 form.reset();
                 Swal.fire({
@@ -64,6 +64,7 @@ const UpdateIssue = () => {
     return (
         <div>
             <Container>
+                <title>Clean Sphere | Update Issues</title>
                 <form onSubmit={handleUpdate} className="p-6  bg-linear-to-br from-green-200 to-teal-200 backdrop-blur-md rounded-2xl shadow-xl border-2 border-green-200 space-y-6">
                     <div className="flex items-center justify-between">
                         <div>

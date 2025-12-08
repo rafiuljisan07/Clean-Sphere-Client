@@ -2,24 +2,29 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Authentication/AuthContext';
 import axios from 'axios';
 import Container from '../container/Container';
+import Loading from './Loading';
 
 const MyContribution = () => {
     const { user } = useContext(AuthContext)
     const [contributions, setContributions] = useState([]);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/my-contributions?email=${user?.email}`)
-            .then(res => setContributions(res.data))
+        axios.get(`https://clean-sphere-server.vercel.app/my-contributions?email=${user?.email}`)
+            .then(res => {
+                setContributions(res.data)
+                setLoading(false)
+            })
             .catch(() => {
 
             })
     }, [user?.email]);
 
-    console.log(contributions);
-    
+    if (loading) return <Loading />
 
     return (
         <Container>
+            <title>Clean Sphere | My Contribution</title>
             <div className="w-full">
                 <div className="overflow-x-auto bg-white shadow-md rounded-lg">
                     <table className="min-w-full text-left">
@@ -55,7 +60,7 @@ const MyContribution = () => {
                                             <div className="text-sm text-gray-700">{con.date}</div>
                                         </td>
                                         <td className="px-6 py-4 align-top">
-                                               <button className='btn btn-accent'>Download</button>
+                                            <button className='btn btn-accent'>Download</button>
                                         </td>
                                     </tr>
                                 ))

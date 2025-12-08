@@ -4,6 +4,7 @@ import Container from '../container/Container';
 import { AuthContext } from '../Authentication/AuthContext';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import ConOnIssue from './ConOnIssue';
 
 const IssueDetails = () => {
     const { user } = useContext(AuthContext)
@@ -22,6 +23,7 @@ const IssueDetails = () => {
         const address = form.address.value;
         const category = form.category.value;
         const info = form.info.value;
+        const issueId = issue?._id
 
         const formData = {
             title,
@@ -32,10 +34,11 @@ const IssueDetails = () => {
             address,
             category,
             date,
+            issueId,
             info
         }
 
-        axios.post('http://localhost:3000/contributions', formData)
+        axios.post('https://clean-sphere-server.vercel.app/contributions', formData)
             .then(() => {
                 form.reset();
                 setShowModal(false);
@@ -53,6 +56,9 @@ const IssueDetails = () => {
 
 
     }
+
+
+
 
     return (
         <Container>
@@ -101,7 +107,7 @@ const IssueDetails = () => {
                                     type="text"
                                     name='title'
                                     value={title}
-                                    disabled
+                                    readonly
                                     className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-800" />
                             </div>
 
@@ -112,7 +118,7 @@ const IssueDetails = () => {
                                         type="number"
                                         name='amount'
                                         value={amount}
-                                        disabled
+                                        readonly
                                         className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-800" />
                                 </div>
                                 <div>
@@ -121,7 +127,7 @@ const IssueDetails = () => {
                                         type="text"
                                         name='category'
                                         value={category}
-                                        disabled
+                                        readonly
                                         className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-800" />
                                 </div>
                                 <input
@@ -146,6 +152,7 @@ const IssueDetails = () => {
                                     <input
                                         type="email"
                                         name='email'
+                                        readonly
                                         value={user?.email}
                                         className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-800" />
                                 </div>
@@ -192,6 +199,8 @@ const IssueDetails = () => {
                     </div>
                 </div>
             )}
+
+            <ConOnIssue issue={issue} />
         </Container>
     );
 };

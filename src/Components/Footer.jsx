@@ -7,7 +7,7 @@ import { FaSquareXTwitter } from 'react-icons/fa6';
 const Footer = () => {
     return (
         <div className='bg-black py-10'>
-            <section className='w-11/12 mx-auto flex justify-between items-center'>
+            <section className='w-11/12 mx-auto flex flex-col sm:flex-row justify-between items-center'>
                 <div>
                     <div>
                         <Link to={'/'} className='flex items-center gap-2'>
@@ -20,7 +20,7 @@ const Footer = () => {
                         <p className='text-gray-300 w-1/2 mt-4'>Connecting communities through actionable insights — report, track, and resolve local issues for a cleaner, smarter environment.</p>
                     </div>
                 </div>
-                <div className='text-white text-3xl flex flex-col sm:flex-row gap-4 w-1/2 justify-center'>
+                <div className='text-white text-3xl flex gap-4 w-1/2 justify-center'>
                     <a href="https://www.facebook.com/rafiulislam.jisan.1" target='_blank'> <FaFacebookSquare />
                     </a>
                     <a href="https://www.linkedin.com/in/rafiul-islam-jisan-99ba26332/" target='_blank'><FaLinkedin />
@@ -29,10 +29,6 @@ const Footer = () => {
                     </a>
                     <a href="https://github.com/rafiuljisan07" target='_blank'>  <FaGithubSquare />
                     </a>
-
-                    
-                   
-
                 </div>
             </section>
             <section>

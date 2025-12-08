@@ -11,6 +11,7 @@ import MyContribution from "../Components/MyContribution";
 import IssueDetails from "../Components/IssueDetails";
 import UpdateIssue from "../Pages/UpdateIssue";
 import CatIssues from "../Components/CatIssues";
+import Error from "../Components/Error";
 
 export const router = createBrowserRouter([
     {
@@ -23,8 +24,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/issues',
-                element: <All_Issues />,
-                loader: () => fetch('http://localhost:3000/issues')
+                element: <All_Issues />
             },
             {
                 path: '/login',
@@ -61,7 +61,7 @@ export const router = createBrowserRouter([
                     <PrivateRoute>
                         <IssueDetails />
                     </PrivateRoute>),
-                loader: ({params})=> fetch(`http://localhost:3000/issues/${params.id}`)
+                loader: ({ params }) => fetch(`https://clean-sphere-server.vercel.app/issues/${params.id}`)
             },
             {
                 path: '/my-issues/update/:id',
@@ -78,5 +78,9 @@ export const router = createBrowserRouter([
                     </PrivateRoute>)
             }
         ]
+    },
+    {
+        path: '*',
+        element: <Error />
     }
 ])

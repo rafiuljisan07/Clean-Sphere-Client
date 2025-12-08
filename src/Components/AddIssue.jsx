@@ -31,7 +31,7 @@ const AddIssue = () => {
             date
         };
 
-        axios.post('http://localhost:3000/issues', formData)
+        axios.post('https://clean-sphere-server.vercel.app/issues', formData)
             .then(() => {
                 Swal.fire({
                     icon: "success",
@@ -51,6 +51,7 @@ const AddIssue = () => {
     }
     return (
         <Container>
+            <title>Clean Sphere | Add Issues</title>
             <form onSubmit={handleSubmit} className="p-6  bg-linear-to-br from-green-200 to-teal-200 backdrop-blur-md rounded-2xl shadow-xl border-2 border-green-200 space-y-6">
                 <div className="flex items-center justify-between">
                     <div>
